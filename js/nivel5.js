@@ -4,12 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const instruccion = document.getElementById("instruccion");
   const colores = document.querySelectorAll(".color");
 
-  // Volumen y loop de música
-  if (musica) { musica.volume = 0.05; musica.loop = true; }
+  // Preparar música
+  if (musica) {
+    musica.volume = 0.05;
+    musica.loop = true;
+    musica.muted = false;  // 🔥 IMPORTANTE PARA IPHONE
+  }
 
   const setVolume = (audio, v) => { if(audio) audio.volume = v; };
 
-  // Audios por color
+  // Audios
   const audioPresentacion = {
     amarillo: document.getElementById("audioAmarillo"),
     azul: document.getElementById("audioAzul"),
@@ -48,15 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let paso = 0;
   let seleccionable = false;
 
-  // Función para reproducir audio y esperar a que termine
+  // Función segura para iPhone
   const playAwait = (audio) => {
     return new Promise(resolve => {
       if(!audio) return resolve();
+
       audio.currentTime = 0;
-      const p = audio.play();
-      if(p && p.then){
-        p.then(()=> audio.onended = () => resolve())
-         .catch(()=> resolve());
+      let p = audio.play();
+
+      if (p && p.then) {
+        p.then(() => audio.onended = () => resolve())
+         .catch(() => resolve());
       } else {
         audio.onended = () => resolve();
       }
@@ -64,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const mostrarInstruccion = (txt) => {
-    if(!instruccion) return;
     instruccion.classList.remove("show");
     setTimeout(() => {
       instruccion.textContent = txt;
@@ -72,22 +77,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   };
 
-  // Botón comenzar
-  if(btnComenzar){
-    btnComenzar.addEventListener("click", async () => {
-      btnComenzar.style.display = "none";
-      if(musica && musica.paused) musica.play().catch(()=>{});
-      await iniciarJuego();
-    });
-  }
+  // ---------------------------
+  //  BOTÓN COMENZAR (iPhone FIX)
+  // ---------------------------
+  btnComenzar.addEventListener("click", async () => {
 
-  // Presentación inicial de colores
+    // 🔥 Muy importante para iPhone
+    if (musica) {
+      musica.muted = false;
+      musica.currentTime = 0;
+
+      try {
+        await musica.play();
+        console.log("🎵 Música funcionando en iPhone");
+      } catch (e) {
+        console.log("⚠ iPhone bloqueó el audio:", e);
+      }
+    }
+
+    btnComenzar.style.display = "none";
+    iniciarJuego();
+  });
+
+  // Presentación inicial
   const iniciarJuego = async () => {
-    for(let colorEl of colores){
+    for (let colorEl of colores) {
       const color = colorEl.dataset.color;
       colorEl.classList.add("pulse");
+
       await playAwait(audioPresentacion[color]);
-      await new Promise(r => setTimeout(r, 400)); // presentación un poco más lenta
+
+      // Presentación más lenta
+      await new Promise(r => setTimeout(r, 600));
+
       colorEl.classList.remove("pulse");
     }
 
@@ -107,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if(color === orden[paso]){
         seleccionable = false;
         colorEl.style.border = "4px solid white";
+
         await playAwait(audioTocado[color]);
         paso++;
 
@@ -114,17 +137,25 @@ document.addEventListener("DOMContentLoaded", () => {
           mostrarInstruccion(`Toca el color ${orden[paso]}`);
           await playAwait(audioInstruccion[orden[paso]]);
           seleccionable = true;
-        } else {
+        } 
+        else {
           mostrarInstruccion("¡Muy bien!");
-          if(audioFelicitaciones) await playAwait(audioFelicitaciones);
+          await playAwait(audioFelicitaciones);
+
           if(musica) musica.pause();
-          setTimeout(()=> window.location.href = "../niveles/nivel6.html", 1000);
+
+          setTimeout(() => {
+            window.location.href = "../niveles/nivel6.html";
+          }, 600); // más rápido como pediste
         }
+
       } else {
         seleccionable = false;
         mostrarInstruccion(`❌ Incorrecto, intenta de nuevo`);
+
         colores.forEach(c => c.style.border = "none");
-        setTimeout(async ()=>{
+
+        setTimeout(async () => {
           mostrarInstruccion(`Toca el color ${orden[paso]}`);
           await playAwait(audioInstruccion[orden[paso]]);
           seleccionable = true;
