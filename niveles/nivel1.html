@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nivel 1 - Colores</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="nivel1">
+
+  <div class="container">
+    <h1 class="titulo">Nivel 1 - Colores Primarios</h1>
+    <p id="instruccion" class="instruccion"></p>
+
+    <div class="numeros">
+      <div class="numero color amarillo" data-color="amarillo"></div>
+      <div class="numero color azul" data-color="azul"></div>
+      <div class="numero color rojo" data-color="rojo"></div>
+    </div>
+
+    <button id="btnComenzar">Comenzar</button>
+  </div>
+
+
+
+  <!-- Presentación -->
+  <audio id="audioAmarillo" src="../musica/amarilloPresentacion.mp3" preload="auto"></audio>
+  <audio id="audioAzul" src="../musica/azulPresentacion.mp3" preload="auto"></audio>
+  <audio id="audioRojo" src="../musica/rojoPresentacion.mp3" preload="auto"></audio>
+
+  <!-- Instrucciones -->
+  <audio id="audioInstruccionAmarillo" src="../musica/amarilloSolicitud.mp3" preload="auto"></audio>
+  <audio id="audioInstruccionAzul" src="../musica/azulSolicitud.mp3" preload="auto"></audio>
+  <audio id="audioInstruccionRojo" src="../musica/rojoSolicitud.mp3" preload="auto"></audio>
+
+  <!-- Sonido al tocar -->
+  <audio id="audioTocadoAmarillo" src="../musica/amarillo.mp3" preload="auto"></audio>
+  <audio id="audioTocadoAzul" src="../musica/azul.mp3" preload="auto"></audio>
+  <audio id="audioTocadoRojo" src="../musica/rojo.mp3" preload="auto"></audio>
+
+  <!-- Felicitación -->
+  <audio id="audioMuyBien" src="../musica/felicitaciones.mp3" preload="auto"></audio>
+
+  <!-- Música de fondo -->
+  <audio id="musicaFondo" src="../musica/fondo.mp3" preload="auto" loop></audio>
+
+  <script src="../js/nivel1.js"></script>
+</body>
+</html>

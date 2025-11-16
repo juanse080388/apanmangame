@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nivel 6 - Números</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="nivel6">
+
+  <div class="container">
+    <h1 class="titulo">Nivel 6 - Recordemos todos los Números</h1>
+    <p id="instruccion" class="instruccion"></p>
+
+    <div class="numeros">
+      <div class="numero" data-num="1">1</div>
+      <div class="numero" data-num="2">2</div>
+      <div class="numero" data-num="3">3</div>
+      <div class="numero" data-num="4">4</div>
+      <div class="numero" data-num="5">5</div>
+      <div class="numero" data-num="6">6</div>
+    </div>
+
+    <button id="btnComenzar">Comenzar</button>
+  </div>
+
+  <!-- Cartel de felicitaciones -->
+  <div id="cartelFelicitaciones" class="felicitaciones oculto">
+    ¡FELICITACIONES!
+  </div>
+
+  <!-- Presentación -->
+  <audio id="audio1Presentacion" src="../musica/audio1presentacion.mp3" preload="auto"></audio>
+  <audio id="audio2Presentacion" src="../musica/audio2presentacion.mp3" preload="auto"></audio>
+  <audio id="audio3Presentacion" src="../musica/audio3presentacion.mp3" preload="auto"></audio>
+  <audio id="audio4Presentacion" src="../musica/audio4presentacion.mp3" preload="auto"></audio>
+  <audio id="audio5Presentacion" src="../musica/audio5presentacion.mp3" preload="auto"></audio>
+  <audio id="audio6Presentacion" src="../musica/audio6presentacion.mp3" preload="auto"></audio>
+
+  <!-- Instrucciones -->
+  <audio id="audioInstruccion1" src="../musica/audio1instruccion.mp3" preload="auto"></audio>
+  <audio id="audioInstruccion2" src="../musica/audio2instruccion.mp3" preload="auto"></audio>
+  <audio id="audioInstruccion3" src="../musica/audio3instruccion.mp3" preload="auto"></audio>
+  <audio id="audioInstruccion4" src="../musica/audio4instruccion.mp3" preload="auto"></audio>
+  <audio id="audioInstruccion5" src="../musica/audio5instruccion.mp3" preload="auto"></audio>
+  <audio id="audioInstruccion6" src="../musica/audio6instruccion.mp3" preload="auto"></audio>
+
+  <!-- Sonido al tocar -->
+  <audio id="audioTocado1" src="../musica/audio1tocado.mp3" preload="auto"></audio>
+  <audio id="audioTocado2" src="../musica/audio2tocado.mp3" preload="auto"></audio>
+  <audio id="audioTocado3" src="../musica/audio3tocado.mp3" preload="auto"></audio>
+  <audio id="audioTocado4" src="../musica/audio4tocado.mp3" preload="auto"></audio>
+  <audio id="audioTocado5" src="../musica/audio5tocado.mp3" preload="auto"></audio>
+  <audio id="audioTocado6" src="../musica/audio6tocado.mp3" preload="auto"></audio>
+
+  <!-- Felicitación -->
+  <audio id="audioMuyBien" src="../musica/felicitaciones.mp3" preload="auto"></audio>
+
+  <!-- Música de fondo -->
+  <audio id="musicaFondo" src="../musica/fondo.mp3" preload="auto" loop></audio>
+
+  <script src="../js/nivel6.js"></script>
+</body>
+</html>

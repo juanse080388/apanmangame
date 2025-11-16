@@ -1,0 +1,309 @@
+/* =========================
+   CSS UNIFICADO - JUEGO INTERACTIVO
+   ========================= */
+
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* BODY GENERAL */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* IMAGEN DE FONDO OPACA */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.35);
+  z-index: -1;
+}
+
+/* BACKGROUNDS ESPECÍFICOS */
+body.nivel-index::before { background-image: url('../imagenes/fondo_index.jpg'); }
+body.nivel1::before       { background-image: url('../imagenes/fondo_nivel1.jpeg'); }
+body.nivel2::before       { background-image: url('../imagenes/fondo_nivel2.jpg'); }
+body.nivel3::before       { background-image: url('../imagenes/fondo_nivel3.jpg'); }
+body.nivel4::before       { background-image: url('../imagenes/fondo_nivel3.jpg'); }
+body.nivel5::before       { background-image: url('../imagenes/fondo_nivel5.jpg'); }
+body.nivel6::before       { background-image: url('../imagenes/fondo_nivel6.jpg'); }
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+  background: rgba(226, 173, 173, 0.9);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* TITULO DEL JUEGO - APAMAN (Neón animado) */
+.titulo-apaman {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow:
+    0 0 8px #ff9c00,
+    0 0 16px #ff9c00,
+    0 0 24px #ff6a00,
+    0 0 32px #ff6a00,
+    0 0 48px #ffcc00;
+  animation: neonGlow 2s ease-in-out infinite alternate;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow:
+      0 0 8px #ff9c00,
+      0 0 16px #ff9c00,
+      0 0 24px #ff6a00,
+      0 0 32px #ff6a00,
+      0 0 48px #ffcc00;
+  }
+  50% {
+    text-shadow:
+      0 0 12px #ff9c00,
+      0 0 24px #ff9c00,
+      0 0 36px #ff6a00,
+      0 0 48px #ff6a00,
+      0 0 72px #ffcc00;
+  }
+  100% {
+    text-shadow:
+      0 0 8px #ff9c00,
+      0 0 16px #ff9c00,
+      0 0 24px #ff6a00,
+      0 0 32px #ff6a00,
+      0 0 48px #ffcc00;
+  }
+}
+
+/* DESCRIPCION E INSTRUCCIONES */
+.descripcion, .instruccion {
+  font-size: 1.2rem;
+  color: #222;
+  min-height: 30px;
+  transition: all 0.3s ease;
+}
+
+.instruccion.show {
+  opacity: 1;
+}
+
+/* BOTON COMENZAR */
+#btnComenzar {
+  margin-top: 25px;
+  padding: 20px 60px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 18px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#btnComenzar:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+/* NÚMEROS Y COLORES */
+.numeros, .colores {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  gap: 25px;
+}
+
+/* COLORES (nivel 1) con pulso y glow */
+.color {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color.amarillo { background: #FFD700; }
+.color.azul     { background: #1E90FF; }
+.color.rojo     { background: #FF4500; }
+
+.color.pulse {
+  animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0);
+  }
+}
+
+/* NÚMEROS (nivel 2) con glow animado */
+.numero {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: #e84444;
+  color: #ffffff;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.numero.pulse {
+  animation: numberGlow 1.5s infinite;
+}
+
+@keyframes numberGlow {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 0px rgba(0,0,0,0);
+  }
+  50% {
+    transform: scale(1.1);
+    text-shadow:
+      0 0 10px rgba(255,255,255,0.7),
+      0 0 20px rgba(255,255,255,0.5),
+      0 0 30px rgba(255,255,255,0.3);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0px rgba(0,0,0,0);
+  }
+}
+
+/* COLORES (nivel 3) con pulso y glow */
+.color {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color.naranja { background: #e9771a; }
+.color.verde     { background: #0f8c13; }
+.color.violeta     { background: hsl(291, 96%, 19%); }
+
+.color.pulse {
+  animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255,255,255,0);
+  }
+}
+
+
+/* NÚMEROS (nivel 4) con glow animado */
+.numero {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: #e84444;
+  color: #ffffff;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.numero.pulse {
+  animation: numberGlow 1.5s infinite;
+}
+
+@keyframes numberGlow {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 0px rgba(0,0,0,0);
+  }
+  50% {
+    transform: scale(1.1);
+    text-shadow:
+      0 0 10px rgba(255,255,255,0.7),
+      0 0 20px rgba(255,255,255,0.5),
+      0 0 30px rgba(255,255,255,0.3);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0px rgba(0,0,0,0);
+  }
+}
+
+/* FELICITACIONES */
+.felicitaciones {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(76,175,80,0.9);
+  padding: 30px 50px;
+  border-radius: 25px;
+  display: none;
+  z-index: 10;
+}
+
+.felicitaciones.mostrar {
+  display: flex;
+  animation: pulseGlow 1.5s infinite;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .container { padding: 20px 25px; }
+  .titulo-apaman { font-size: 3rem; }
+  .descripcion, .instruccion { font-size: 1rem; }
+  #btnComenzar { padding: 15px 40px; font-size: 1.1rem; }
+  .numero, .color { width: 90px; height: 90px; font-size: 2rem; }
+}
